@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect,url_for, flash
-from app.models import Entry, add_entry
+from app.models import Entry, add_or_edit_entry
 from app.forms import EntryForm
-from app import app
+from app import app, db
 
 @app.route('/')
 def home():
@@ -10,16 +10,8 @@ def home():
 
 @app.route('/add', methods = ['GET', 'POST'])
 def add_post():
-    form = EntryForm()
-    errors = None
-    if request.method == 'POST':
-        if form.validate_on_submit():
-            data = form.data
-            add_entry(data)
-            flash("New entry has been added")
-        else:
-            errors = form.errors
-        return redirect(url_for('home'))
-    
-    return render_template("entry_form.html", form = form)
-
+    return add_or_edit_entry(entry_id = None)
+  
+@app.route('/edit/<int:entry_id>', methods = ['GET', 'POST'])
+def edit_entry(entry_id):
+    return add_or_edit_entry(entry_id)
