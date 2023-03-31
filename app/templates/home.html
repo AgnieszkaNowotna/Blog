@@ -1,4 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Welcome</h1>
+    <div class = "row mt-2 col-12">
+            {% for post in posts %}
+            <div class = "card col-5 mb-2 mx-1 px-0">
+                <div class = "card-header  bg-warning">
+                    <div class = "card-title"><h2>{{ post.title }}</h2></div>
+                    <div class = "card-subtitle text-secondary"><p>{{ post.publish_date.strftime("%H:%M:%S-%d.%m.%Y") }}</p></div>
+                </div>
+                <div class = "card-body">
+                    <div class = "card-text"><p>{{ post.body }}</p></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 {% endblock %}

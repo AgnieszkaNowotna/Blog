@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Add new entry</h3>
+<form id = "entry_form", action="{{ url_for('add_post')}}", method = "POST">
+    {{ form.hidden_tag() }}
+    <div class = "form-group">
+        <label for="title">Entry's title</label>
+        {{ form.title (class_="form-control")}}
+    </div>
+    <div class = "form-group">
+        <label for="body">Content</label>
+        {{ form.body (class_="form-control", cols="100", rows="10")}}
+    </div>
+    <div class="form-check">
+        {{ form.is_published(class="form-check-input") }}
+        <label class="form-check-label" for="is_published">Entry published</label>
+    </div>
+    <button class = "btn btn-warning", type = "submit">Save</button>
+</form>
+{% endblock %}
