@@ -21,9 +21,7 @@ def add_or_edit_entry(entry_id):
 
     if request.method == "POST":
         if form.validate_on_submit():
-            print(entry_id)
             if entry_id == None:
-                print("Właśnie dodajemy")
                 entry = Entry(
                     title = form.data['title'],
                     body = form.data['body'],
@@ -32,7 +30,6 @@ def add_or_edit_entry(entry_id):
                 db.session.add(entry)
                 flash("New entry has been added")
             else:
-                print("Właśnie edytujemy")
                 form.populate_obj(entry)
                 flash("Entry has been updated") 
         else:
