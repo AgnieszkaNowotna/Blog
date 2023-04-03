@@ -15,24 +15,28 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="{{ url_for('home') }}">Blog</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('add_post') }}">Add post</a></li>
-                        {% if session['logged_in'] == True %}
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('list_drafts') }}">Drafts</a></li>
-                        {% endif %}
-                        {% if session['logged_in'] != True %}
-                            <li class="nav-item"><a class ="nav-link btn btn-warning text-dark" aria-current="page" href="{{ url_for('login') }}">Sign in</a></li>
-                        {% else %}
-                        <form method = "POST" action = "{{ url_for('logout') }}">
-                            <button class = "btn btn-warning" type = "submit"><li class="nav-item">Log out</li></button>
-                        </form>
-                        {% endif %}
-                    </ul>
-                </div>
+                <a class="navbar-brand d-inline-block" href="{{ url_for('home') }}">Blog</a>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" aria-current="page" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" aria-current="page" href="{{ url_for('add_post') }}">Add post</a>
+                    </li>
+                    {% if session['logged_in'] == True %}
+
+                    {% endif %}
+                    {% if session['logged_in'] == True %}
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" aria-current="page" href="{{ url_for('list_drafts') }}">Drafts</a>
+                    </li>
+                    <form method = "POST" action = "{{ url_for('logout') }}">
+                        <button class = "btn btn-warning d-inline-block float-end" type = "submit">Log out</button>
+                    </form>
+                    {% else %}
+                        <a class ="nav-link btn btn-warning text-dark d-inline-block float-end" aria-current="page" href="{{ url_for('login') }}">Sign in</a>
+                    {% endif %}
+                </ul>
             </div>
         </nav>
         <!-- Page content-->
@@ -58,6 +62,5 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-        
     </body>
 </html>

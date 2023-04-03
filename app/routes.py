@@ -24,6 +24,15 @@ def list_drafts():
     posts = Entry.query.filter_by(is_published = False).order_by(Entry.publish_date.desc())
     return render_template("list_drafts.html", posts = posts)
 
+@app.route('/delete_entry/<int:entry_id>', methods = ['POST'])
+@login_required
+def delete_entry(entry_id):
+    entry = Entry.query.filter_by(id = entry_id).first()
+    db.session.delete(entry)
+    db.session.commit()
+    flash('Entry has been deleted')
+    return redirect(url_for('home'))
+
 @app.route("/login", methods = ["GET", "POST"])
 def login():
     form = LoginForm()

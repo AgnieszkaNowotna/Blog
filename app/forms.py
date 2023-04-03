@@ -7,7 +7,7 @@ from config import Config
 class EntryForm(FlaskForm):
     title = StringField('Title', validators = [DataRequired()])
     body = TextAreaField('Content', validators = [DataRequired()])
-    is_published = BooleanField('Publish', default = True, validators = [DataRequired()])
+    is_published = BooleanField('Publish', default = True)
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators = [DataRequired()])
