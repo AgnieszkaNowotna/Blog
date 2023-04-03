@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class = "row  mx-auto mt-2 col-12">
+        <table class = "table mx-auto col-10">
+            <thead>
+                <th scope = "col">Date</th>
+                <th scope = "col">Title</th>
+                <th scope = "col">Content</th>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr scope = "col">
+                    <td>{{ post.publish_date }}</td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.body }}</td>
+                    <td>
+                        <form id = "delete_form" action =#  method  = "POST">
+                        <button type = "submit" class = "btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+{% endblock %}

@@ -1,7 +1,8 @@
 from . import db
-from flask import request, render_template, redirect, url_for, flash
+from flask import request, render_template, redirect, url_for, flash, session
 from app.forms import EntryForm
 import datetime as dt
+import functools
 
 class Entry(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -39,3 +40,11 @@ def add_or_edit_entry(entry_id):
         return redirect(url_for('home'))
     
     return render_template("entry_form.html", form = form)
+
+def login_required(view_func):
+    @functools.wraps(view_func)
+    def check_permissions(*args, **kwargs):
+        if session.get('logged_in'):
+            return view_func(*args, **kwargs)
+        return redirect(url_for('login', next=request.path))
+    return check_permissions
